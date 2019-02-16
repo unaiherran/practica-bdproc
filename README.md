@@ -8,7 +8,7 @@ Primero se realiza las importaciones de librerias necesarias, asi como la defini
 
 A continuación se cargan los datos en un Dataset. Se muestran los datos sólo para control de que se han cargado correctamente
 
-Se define una función que realiza un GET de una URL para realizar la consulta del valor actual del cambio USD/EUR [Documentación del API]|(https://fixer.io/documentation)
+Se define una función que realiza un GET de una URL para realizar la consulta del valor actual del cambio USD/EUR [Documentación del API](https://fixer.io/documentation)
 
 `{"success":true,"timestamp":1550358845,"base":"EUR","date":"2019-02-16","rates":{"USD":1.129649}}`
 
