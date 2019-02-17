@@ -40,9 +40,33 @@ Pero al necesitar distintos ficheros para realizar la segunda fase, se elimina l
 
 ## Fase 2
 (Fichero `practica2.scala` realizado en el IDE)
+El objetivo de esta fase es mandar un correo si el precio medio excede un valor límite establecido. Como el correo es simulado lo que se realiza es mandar a Kafka un evento con el listado de las zonas que han excedido el precio límite, ordenado por precio.
 
+Nada más empezar, sedefine la variable `limiteAlerta`, un `Double` que se configurará con el valor de alerta deseado. Una opción a considerar sería pasar ese valor como parametro a la hora de lanzar el jar, y pese a que lo he intentado he sido incapaz de hacerlo
 
+Al realizar a traves de InteliJ hay que realizar la inicialización del entorno Spark (En Zeppelin se precarga)
 
+El funcionamiento de Spark Streaming es muy similar al de Spark SQL, y los pasos son similares. Se carga en el stream un directorio, de manera que cuando cambien los archivos de ese directorio se vuelva a procesar los datos. Esto sería parte de un proceso más complejo, pero, para realizar la simulación de que funciona correctamente, se recomienda ir cargando los archivos pocoo a poco, para ver como cada carga de archivos el proceso hace lo que se espera de él.
+
+A la hora de realizar la salida tenemos algún requisito por parte de Spark Streaming. Si se quiere hacer un dump completo, es necesario realizar funciones de agregación con lo que se vuelve a realizar la media de los valores. Sería más apropiado que, en lugar de cargar los valores medios, en el proceso real cargasemos los precios de cada una de las ventas, con su fecha, con lo que tendriamos una información más correcta. Pero esto se aleja de lo que pide el enunciado.
+
+Se ordena la lista y se filtran los valores por encima del límite y esto se muestra en consola o en kafka (Comentando y descomentando las lineas 72 y 73 según se desee uno u otro.
+
+Para poner en marcha Kafka hay que lanzar en local Zookeeper y el servidor de Kafka
+
+```
+bin/zookeeper-server-start.sh config/zkeeper.properties
+bin/kafka-server-start.sh config/server.properties
+```
+
+y añadir un topic llamado `alertaPrecios`
+
+`bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic alertaPrecios`
+
+Si queremos ver que tiene Kafka podemos ejecutar 
+`bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic alertaPrecios --from-beginning`
+
+En productivo tendriamos que cambiar las direcciones de salida de kafka, para que en lugar de apuntar a `localhost` apuntase a un servidor de Kafka de la instalación.
 
 ## Fase 3
 
