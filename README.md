@@ -48,7 +48,7 @@ Pero al necesitar distintos ficheros para realizar la segunda fase, se elimina l
 
 
 
-##ToDo
+### ToDo
 
 - [] Fase 1 - excepciones en el GET
 - [] Fase 1 - Libreria JSON para importar el valor de USD
