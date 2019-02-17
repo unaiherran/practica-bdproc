@@ -80,7 +80,7 @@ A partir de este momento es seguir el ejemplo, usando la Localización y el tama
 
 Probablemente el modelo elegido no es el apropiado, o no tenemos datos suficientes para generar los datos.
 
-A continuación intento hacer una predicción usando sólo los datos de tamaño, precio, baños y habitaciones (`f3_sin_loc.json`) y el del error es menor (280.000$ aprox **240.000€**) pero sigue sin ser válido. Espero que con los conocimientos que gane en proximos módulos, pueda mejorar estos valores.
+A continuación intento hacer una predicción usando sólo los datos de tamaño, precio, baños y habitaciones (`f3_sin_loc.json`) y aunque el error es menor (280.000$ aprox **240.000€**) sigue sin ser válido. Espero que con los conocimientos que gane en proximos módulos, pueda mejorar estos valores.
 
 ### ToDo
 
