@@ -4,7 +4,7 @@
 
 El objetivo es importar un fichero separado por comas *csv*, realizar las transformaciones necesarias en él para luego exportarlos en el directorio real-estate usando Spark SQL
 
-Primero se realiza las importaciones de librerias necesarias, asi como la definición de la clase Hogares, con los nombres del los campos del *csv*, que servirán para importación. Tambien se define el esquema que evitará que al realizar la importación del *csv* se infieran tipos incorrectos.
+Primero se realiza las importaciones de librerias necesarias, asi como la definición de la clase Hogares, con los nombres del los campos del **csv**, que servirán para importación. Tambien se define el esquema que evitará que al realizar la importación del **csv** se infieran tipos incorrectos.
 
 A continuación se cargan los datos en un Dataset. Se muestran los datos sólo para control de que se han cargado correctamente
 
@@ -22,13 +22,22 @@ Aunque el csv da los datos de precio por SqFt, prefiero no realizar una conversi
 
 Además, después de ver los datos, se ve que hay veces que la misma localización se nombra de distintas maneras, a veces con espacios al principio del nombre y a veces sin espacios. Para normalizarlo genero una función equivalente al *TRIM* de SQL, que quita los espacios iniciales, intermedios y finales, convirtiendo '   Los    Gatos  ' en 'Los Gatos', con lo que evitamos generar valores de localización duplicados
 
+Una vez se realizan todas estas transformaciones, sólo es necesario agrupar por localización y por la media del precio del m2 por localidad.
 
+Antes de escribir, se realiza una última tranformación, la de cambiar los resultados de las medias de precio, a sólo dos decimales. Se podrían haber realizado antes, pero es una buena practica realizar los calculos con todos los decimales posibles y sólo realizar el redondeo cuando se muestran los datos.
 
-Se crea una tabla auxiliar
-
-
-que 
+Si se desea ver un informe en un sólo informe JSON, se usa la siguiente  
+```
+mediaPorLocalizacion.select($"Localizacion", redondeaPrecio($"Preciom2medio").as("Precio por m2"))
+            .coalesce(1)
+            .write
+            .format("json")
+            .save("file:///home/kc/Documentos/real-estate")
+```
+La instrucción de `coalesce(1)`se elimina para tener el input correcto para la Fase 2
 
 ## Fase 2
+
+
 
 ## Fase 3
