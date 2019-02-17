@@ -68,7 +68,22 @@ Si queremos ver que tiene Kafka podemos ejecutar
 
 En productivo tendriamos que cambiar las direcciones de salida de kafka, para que en lugar de apuntar a `localhost` apuntase a un servidor de Kafka de la instalación.
 
-## Fase 3
+## Fase 3 (Opcional)
+
+Intento hacer la fase 3 sin gran éxito, adaptando el [ejemplo suministrado](https://blog.scalac.io/scala-spark-ml.html) a los datos que tenemos. 
+
+Para ello, y usando como punto de partida la Fase 1, leemos del **csv** y realizamos todas las transformaciones necesarias (cambio a Euros, cambio de sqFt a m2...)
+
+Finalmente, eliminamos las localizaciones Bakersfield, Greenfield y Lockwood, por tener pocos datos para entrenar el modelo (sólo 1 por localizacion)
+
+A partir de este momento es seguir el ejemplo, usando la Localización y el tamaño como datos de entrenamiento. Para ello se separa de forma aleatoria el 80% de los datos como datos de entrada y se usa el resto para comprobar el error, **cerca de 300.000 €**, lo cual es muy mal predictor, ya que el precio medio de un hogar es sobre los 400.000
+
+Probablemente el modelo elegido no es el apropiado, o no tenemos datos suficientes para generar los datos.
+
+A continuación intento hacer una predicción usando sólo los datos de tamaño, precio, baños y habitaciones (`Practica BDP - Fase 3 (Prueba sin Localizacion)`) y el del error es similar.
+
+
+
 
 
 
