@@ -1,8 +1,5 @@
 package bdproc.practica_2
 
-
-
-
 import bdproc.common.Utilities.setupLogging
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.sql.SparkSession
@@ -17,7 +14,7 @@ object practica2 {
     // por defecto (y para el test) este parametro vale 5000
     val limiteAlerta: Double = 3000
 
-
+    // inicializacion de SparkSession
     val spark = SparkSession
       .builder()
       .appName("Alerta precios")
@@ -62,7 +59,7 @@ object practica2 {
 
     // Para escribir el resultado se usa Kafka, que recibe el DS filtrado y ordenado de forma completa
     // Se supone que  cuando Kafka tenga un evento se mandará el correo con el mensaje que ha salido de kafka
-    // Para ver el resultado en consola, se ha incluido en la linea 66 y 67 ambos comandos
+    // Para ver el resultado en consola, se ha incluido en la linea 72 y 73 ambos comandos
     // basta con descomentar el que se desea usar y comentar el otro
 
     val alertaPrecios = precioSobreLimite
