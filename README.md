@@ -2,6 +2,8 @@
 
 ## Fase 1
 
+(`Fichero Practica BDP - Fase 1.json` cuaderno de Zeppelin que es necesario importar)
+
 El objetivo es importar un fichero separado por comas *csv*, realizar las transformaciones necesarias en él para luego exportarlos en el directorio real-estate usando Spark SQL
 
 Primero se realiza las importaciones de librerias necesarias, asi como la definición de la clase Hogares, con los nombres del los campos del **csv**, que servirán para importación. Tambien se define el esquema que evitará que al realizar la importación del **csv** se infieran tipos incorrectos.
@@ -26,7 +28,7 @@ Una vez se realizan todas estas transformaciones, sólo es necesario agrupar por
 
 Antes de escribir, se realiza una última tranformación, la de cambiar los resultados de las medias de precio, a sólo dos decimales. Se podrían haber realizado antes, pero es una buena practica realizar los calculos con todos los decimales posibles y sólo realizar el redondeo cuando se muestran los datos.
 
-Si se desea ver un informe en un sólo informe JSON, se usa la siguiente instrucción.
+Si se desea ver un informe en un sólo informe JSON, se usa la siguiente instrucción. (Genera el fichero `Datos de salida Fase 1.json`)
 ```
 mediaPorLocalizacion.select($"Localizacion", redondeaPrecio($"Preciom2medio").as("Precio por m2"))
             .coalesce(1)
@@ -34,10 +36,22 @@ mediaPorLocalizacion.select($"Localizacion", redondeaPrecio($"Preciom2medio").as
             .format("json")
             .save("file:///home/kc/Documentos/real-estate")
 ```
-Pero al necesitar distintos ficheros para realizar la segunda fase, se elimina la linea de `coalesce(1)` para poder tener varios ficheros que nos facilitarán la comprobación del Streaming en la Fase 2
+Pero al necesitar distintos ficheros para realizar la segunda fase, se elimina la linea de `coalesce(1)` para poder tener varios ficheros que nos facilitarán la comprobación del Streaming en la Fase 2 (Una multitud de ficheros `part-000...-c000.json`, comprimidos en el fichero `real-estate.zip`, y que se tienen que colocar el directorio `real estate`)
 
 ## Fase 2
+(Fichero `practica2.scala` realizado en el IDE)
+
 
 
 
 ## Fase 3
+
+
+
+###ToDo
+- [] Fase 1 - excepciones en el GET
+- [] Fase 1 - Libreria JSON para importar el valor de USD
+- [] Fase 2 - Pasar por parametro el valor máximo
+- [] Fase 3
+- Fase 3
+/TODO Fase 3
