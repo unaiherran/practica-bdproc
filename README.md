@@ -26,7 +26,7 @@ Una vez se realizan todas estas transformaciones, sólo es necesario agrupar por
 
 Antes de escribir, se realiza una última tranformación, la de cambiar los resultados de las medias de precio, a sólo dos decimales. Se podrían haber realizado antes, pero es una buena practica realizar los calculos con todos los decimales posibles y sólo realizar el redondeo cuando se muestran los datos.
 
-Si se desea ver un informe en un sólo informe JSON, se usa la siguiente  
+Si se desea ver un informe en un sólo informe JSON, se usa la siguiente instrucción.
 ```
 mediaPorLocalizacion.select($"Localizacion", redondeaPrecio($"Preciom2medio").as("Precio por m2"))
             .coalesce(1)
@@ -34,7 +34,7 @@ mediaPorLocalizacion.select($"Localizacion", redondeaPrecio($"Preciom2medio").as
             .format("json")
             .save("file:///home/kc/Documentos/real-estate")
 ```
-La instrucción de `coalesce(1)`se elimina para tener el input correcto para la Fase 2
+Pero al necesitar distintos ficheros para realizar la segunda fase, se elimina la linea de `coalesce(1)` para poder tener varios ficheros que nos facilitarán la comprobación del Streaming en la Fase 2
 
 ## Fase 2
 
